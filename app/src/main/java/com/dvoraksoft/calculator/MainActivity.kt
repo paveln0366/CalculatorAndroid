@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             СalculatorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Calculator(modifier = Modifier.padding(innerPadding))
+                    Calculator(modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding()))
                 }
             }
         }
