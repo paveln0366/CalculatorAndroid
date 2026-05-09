@@ -1,22 +1,26 @@
 package com.dvoraksoft.calculator
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
-class CalculatorViewModel {
+class CalculatorViewModel : ViewModel() {
 
-    val state = mutableStateOf(
+    private val _state = MutableStateFlow(
         Display(
             expression = "45x8",
             result = "360"
         )
     )
 
+    val state = _state.asStateFlow()
+
     fun processCommand(command: CalculatorCommand) {
         Log.d("CalculatorViewModel", "Command $command")
         when (command) {
             CalculatorCommand.Clear -> {
-
+                _state.value = Display("", "")
             }
 
             CalculatorCommand.Evaluate -> {
